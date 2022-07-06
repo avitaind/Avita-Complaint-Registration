@@ -70,8 +70,8 @@ class HomeController extends Controller
     {
         // dd($request->all());
         try {
-            $file = "";
-            $imageNameArr = [];
+            // $picture = "";
+            // $imageNameArr = [];
             $this->validate($request, [
                 'name'                 => 'required',
                 'status'               => 'required',
@@ -86,23 +86,27 @@ class HomeController extends Controller
                 'state'                => 'required',
                 'pinCode'              => 'required',
                 'issue'                => 'required',
-                'purchaseInvoice'      => 'required',
+                'purchaseInvoice'      => 'required|mimes:pdf,png,jpg,jpeg|max:2048',
             ]);
 
-            if ($request->hasFile('reference')) {
-                $picture = array();
-                $imageNameArr = [];
-                foreach ($request->reference as $file) {
-                    // you can also use the original name
-                    $image = $file->getClientOriginalName();
-                    $imageNameArr[] = $image;
-                    // Upload file to public path in images directory
-                    $fileName = $file->move(date('d-m-Y') . '-Ticket-Reference', $image);
-                    // Database operation
-                    $array[] = $fileName;
-                    $picture = implode(",", $array); //Image separated by comma
-                }
-            }
+            // if ($request->hasFile('purchaseInvoice')) {
+            //     $picture = array();
+            //     $imageNameArr = [];
+            //     foreach ($request->purchaseInvoice as $file) {
+            //         // you can also use the original name
+            //         $image = $file->getClientOriginalName();
+            //         $imageNameArr[] = $image;
+            //         // Upload file to public path in images directory
+            //         $fileName = $file->move(date('d-m-Y') . '-Complaint-Registration', $image);
+            //         // Database operation
+            //         $array[] = $fileName;
+            //         $picture = implode(", ", $array); //Image separated by comma
+            //     }
+            // }
+
+            $fileName = time().'.'.$request->purchaseInvoice->extension();
+
+            $request->purchaseInvoice->move(public_path('Complaint-Registration'), $fileName);
 
             $complRegis = new ComplaintRegistration();
             $complRegis->name              = $request->name;
@@ -118,22 +122,8 @@ class HomeController extends Controller
             $complRegis->state             = $request->state;
             $complRegis->pinCode           = $request->pinCode;
             $complRegis->issue             = $request->issue;
-            $complRegis->purchaseInvoice   = $picture;
+            $complRegis->purchaseInvoice   = $fileName;
             $complRegis->ticketID          = $request->ticketID;
-
-            // $getdata = \App\Models\ComplaintRegistration::latest()->first();
-
-            // dd($complRegis);
-
-            // if ($getdata == '') {
-            //     # code...
-            //     $result = $complRegis->save();
-            // } elseif ($getdata->purchase_code == $request->purchase_code) {
-            //     # code...
-            //     return redirect()->back()->with("error", "Product Code is Already Registration.");
-            // } else {
-            //     $result = $complRegis->save();
-            // }
 
             $result = $complRegis->save();
 

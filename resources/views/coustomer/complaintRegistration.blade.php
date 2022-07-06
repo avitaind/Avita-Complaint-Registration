@@ -21,7 +21,7 @@
                                                 <label for="ticketID" class="form-label">Ticket ID</label>
                                                 <input type="text" class="form-control" id="ticketID"
                                                     aria-describedby="ticketIDHelp" name="ticketID"
-                                                    value="{{ $ticketID}}" readonly>
+                                                    value="{{ $ticketID }}" readonly>
                                             </div>
                                         </div>
 
@@ -30,8 +30,8 @@
                                             <div class="mb-3">
                                                 <label for="status" class="form-label">Status</label>
                                                 <input type="text" class="form-control" id="status"
-                                                    aria-describedby="statusHelp" name="status"
-                                                    value="In Processing" readonly>
+                                                    aria-describedby="statusHelp" name="status" value="In Processing"
+                                                    readonly>
                                             </div>
                                         </div>
 
@@ -110,7 +110,7 @@
                                                 <label for="purchaseDate" class="form-label">Purchase Date</label>
                                                 <input type="date"
                                                     class="form-control @error('purchaseDate') is-invalid @enderror"
-                                                    id="purchaseDate" aria-describedby="purchaseDateHelp"
+                                                    id="dateID" aria-describedby="purchaseDateHelp"
                                                     name="purchaseDate">
                                                 @error('purchaseDate')
                                                     <span class="invalid-feedback form-text" id="phoneHelp" role="alert">
@@ -132,7 +132,8 @@
                                                     <option value="Yes">Yes</option>
                                                     <option value="No">No</option>
                                                     @error('warrantyCheck')
-                                                        <span class="invalid-feedback form-text" id="phoneHelp" role="alert">
+                                                        <span class="invalid-feedback form-text" id="phoneHelp"
+                                                            role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
@@ -253,4 +254,22 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+<script>
+    //Display Only Date till today //
+    var dtToday = new Date();
+    var month = dtToday.getMonth() + 1; // getMonth() is zero-based
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if (month < 10)
+        month = '0' + month.toString();
+    if (day < 10)
+        day = '0' + day.toString();
+
+    var maxDate = year + '-' + month + '-' + day;
+    $('#dateID').attr('max', maxDate);
+</script>
+
 @endsection
