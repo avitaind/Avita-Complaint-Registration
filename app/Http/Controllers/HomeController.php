@@ -54,11 +54,14 @@ class HomeController extends Controller
     {
         try {
             $getdata = \App\Models\ComplaintRegistration::latest()->first();
+            // dd($getdata);
 
             if (isset($getdata) && $getdata) {
                 $incid = $getdata->id + 1;
                 $num_padded = sprintf("%03d", $incid);
                 $ticketID = "Complaint ID-" . $num_padded;
+                // dd($ticketID);
+
             } else {
                 $incid = 1;
                 $num_padded = sprintf("%03d", $incid);
@@ -91,6 +94,7 @@ class HomeController extends Controller
                 'state'                => 'required',
                 'pinCode'              => 'required',
                 'issue'                => 'required',
+                'ticketID'             => 'required',
                 'purchaseInvoice'      => 'required|mimes:pdf,png,jpg,jpeg|max:2048',
             ]);
 
