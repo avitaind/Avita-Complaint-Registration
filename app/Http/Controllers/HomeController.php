@@ -42,7 +42,12 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('coustomer.coustomerHome');
+        try {
+            $getdata = \App\Models\ComplaintRegistration::latest()->first();
+        } catch (ModelNotFoundException $exception) {
+            return back()->withError($exception->getMessage())->withInput();
+        }
+        return view('coustomer.coustomerHome', ['getdata' => $getdata]);
     }
 
     public function complaintRegistration()
@@ -104,7 +109,7 @@ class HomeController extends Controller
             //     }
             // }
 
-            $fileName = time().'.'.$request->purchaseInvoice->extension();
+            $fileName = time() . '.' . $request->purchaseInvoice->extension();
 
             $request->purchaseInvoice->move(public_path('Complaint-Registration'), $fileName);
 
@@ -128,7 +133,8 @@ class HomeController extends Controller
             $result = $complRegis->save();
 
             if ($result) {
-                return redirect()->back()->with("success", "Product Complaint Registered...!");
+                // return redirect()->back()->with("success", "Product Complaint Registered...!");
+                return redirect()->route('customerHome')->with("success", "Product Complaint Registered...!");
             }
         } catch (ModelNotFoundException $exception) {
             return redirect()->back()->with("error", "Something is wrong...!");

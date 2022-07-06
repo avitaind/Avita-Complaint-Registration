@@ -8,17 +8,21 @@
                     <div class="card-header">{{ __('Dashboard') }}</div>
 
                     <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
+                        @include('component.alert')
+
+                        @if ($getdata->name != Auth::user()->name)
+                            <a href="{{ route('complaintRegistration') }}" class="btn btn-primary mt-2 mb-2">Complaint
+                                Registration</a>
+                        @else
+                            {{-- <div class="alert alert-success">Yor Ticket ID is <strong >{{ $getdata->ticketID}} and on going {{ $getdata->status }}</strong></div> --}}
+                            <div class="alert alert-success"> <strong>Your complaint id : {{ $getdata->ticketID }} is
+                                    registered with us. We will update you shortly.</strong></div>
                         @endif
 
-                        <a href="{{ route('complaintRegistration') }}" class="btn btn-primary mt-2 mb-2">Complaint
-                            Registration</a>
-
-                        <br />
-                        {{ __('You are logged in!') }}
+                        {{-- <a href="{{ route('complaintRegistration') }}" class="btn btn-primary mt-2 mb-2">Complaint
+                            Registration</a> --}}
+                        {{-- <br />
+                        {{ __('You are logged in!') }} --}}
 
                     </div>
                 </div>
