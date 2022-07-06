@@ -1,18 +1,18 @@
 @if (session('success'))
     <div class="alert alert-success d-flex align-items-center">
-        <i class="fa fa-check-circle-o fa-2x" aria-hidden="true"></i>  {{ session('success') }}
+        <i class="fa fa-check-circle-o fa-2x" aria-hidden="true"></i>&nbsp;{{ session('success') }}
     </div>
 @endif
 
 @if (session('error'))
     <div class="alert alert-danger d-flex align-items-center" role="alert">
-        <i class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i>  {{ session('error') }}
+        <i class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i>&nbsp;{{ session('error') }}
     </div>
 @endif
 
 @if (session('warning'))
     <div class="alert alert-warning d-flex align-items-center">
-        <i class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i>  {{ session('warning') }}
+        <i class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i>&nbsp;{{ session('warning') }}
     </div>
 @endif
 
