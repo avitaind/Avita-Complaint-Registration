@@ -83,8 +83,8 @@ class HomeController extends Controller
             $this->validate($request, [
                 'name'                 => 'required',
                 'status'               => 'required',
-                'email'                => 'required',
-                'phone'                => 'required',
+                'email'                => 'required|unique:users',
+                'phone'                => 'required|unique:users,phone',
                 'productSerialNo'      => 'required',
                 'productPartNo'        => 'required',
                 'purchaseDate'         => 'required',
