@@ -110,8 +110,7 @@
                                                 <label for="purchaseDate" class="form-label">Purchase Date</label>
                                                 <input type="date"
                                                     class="form-control @error('purchaseDate') is-invalid @enderror"
-                                                    id="dateID" aria-describedby="purchaseDateHelp"
-                                                    name="purchaseDate">
+                                                    id="dateID" aria-describedby="purchaseDateHelp" name="purchaseDate">
                                                 @error('purchaseDate')
                                                     <span class="invalid-feedback form-text" id="phoneHelp" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -257,19 +256,18 @@
 @endsection
 
 @section('js')
-<script>
-    //Display Only Date till today //
-    var dtToday = new Date();
-    var month = dtToday.getMonth() + 1; // getMonth() is zero-based
-    var day = dtToday.getDate();
-    var year = dtToday.getFullYear();
-    if (month < 10)
-        month = '0' + month.toString();
-    if (day < 10)
-        day = '0' + day.toString();
+    <script>
+        //Display Only Date till today //
+        var dtToday = new Date();
+        var month = dtToday.getMonth() + 1; // getMonth() is zero-based
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+        if (month < 10)
+            month = '0' + month.toString();
+        if (day < 10)
+            day = '0' + day.toString();
 
-    var maxDate = year + '-' + month + '-' + day;
-    $('#dateID').attr('max', maxDate);
-</script>
-
+        var maxDate = year + '-' + month + '-' + day;
+        $('#dateID').attr('max', maxDate);
+    </script>
 @endsection

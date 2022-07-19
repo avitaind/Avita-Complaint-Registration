@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">Dashboard</div>
                     <div class="card-body">
-                        You are Admin.
+                        You are Admin.<br>
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -51,7 +51,8 @@
                                             @if ($cdata->purchaseInvoice != '')
                                                 <div class=" text-center"><a class="text-decoration-none text-center"
                                                         href="{{ '/Complaint-Registration/' . $cdata->purchaseInvoice }}"
-                                                        target="_blank" download="{!! $cdata->purchaseInvoice !!}"><i class="fa fa-cloud-download fa-2x" aria-hidden="true"></i></a>
+                                                        target="_blank" download="{!! $cdata->purchaseInvoice !!}"><i
+                                                            class="fa fa-cloud-download fa-2x" aria-hidden="true"></i></a>
                                                 </div>
                                             @else
                                                 <div class="">N/A</div>

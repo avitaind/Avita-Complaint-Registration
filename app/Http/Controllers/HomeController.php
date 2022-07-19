@@ -43,7 +43,8 @@ class HomeController extends Controller
     public function index()
     {
         try {
-            $getdata = \App\Models\ComplaintRegistration::latest()->first();
+            $getdata = \App\Models\ComplaintRegistration::where('email', Auth::user()->email)->latest()->first();
+            // dd($getdata);
         } catch (ModelNotFoundException $exception) {
             return back()->withError($exception->getMessage())->withInput();
         }
@@ -83,7 +84,7 @@ class HomeController extends Controller
             $this->validate($request, [
                 'name'                 => 'required',
                 'status'               => 'required',
-                'email'                => 'required|unique:users',
+                'email'                => 'required',
                 'phone'                => 'required|unique:users,phone',
                 'productSerialNo'      => 'required',
                 'productPartNo'        => 'required',
